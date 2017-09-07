@@ -1,0 +1,553 @@
+/*=============================================================================================================
+General
+=============================================================================================================*/
+
+body {
+    font-family: 'Dosis', sans-serif;
+}
+
+.container {
+    width: 260px;
+    position: relative;
+    overflow: hidden;
+}
+
+.w10 {
+    width: 10%
+}
+
+.w20 {
+    width: 20%
+}
+
+.w30 {
+    width: 30%
+}
+
+.w40 {
+    width: 40%
+}
+
+.w50 {
+    width: 50%
+}
+
+.w60 {
+    width: 60%
+}
+
+.w70 {
+    width: 70%
+}
+
+.w80 {
+    width: 80%
+}
+
+.w90 {
+    width: 90%
+}
+
+.w100 {
+    width: 100%
+}
+
+.left {
+    float: left
+}
+
+.right {
+    float: right
+}
+
+.text-right {
+    text-align: right
+}
+
+.text-left {
+    text-align: left
+}
+
+.text-center {
+    text-align: center
+}
+
+/*=============================================================================================================
+initial-loaction-selection
+=============================================================================================================*/
+.initial-loaction-selection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 260px;
+    height: 600px;
+    background-color: #b1637b;
+    opacity: 0.5px;
+}
+
+.initial-loaction-selection div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 260px;
+    z-index: 200;
+    /*	margin-left: 20px;
+        margin-right: 20px;*/
+}
+
+.select-dropdown {
+    /*position: relative;*/
+    background-color: #b1637b;
+    width: 100%;
+    float: left;
+    color: #f9f9f9;
+    max-width: 100%;
+}
+
+.select-dropdown select {
+    color: #f9f9f9;
+    font-size: 14px;
+    font-weight: 200;
+    width: 100%;
+    padding: 8px 24px 8px 10px;
+    border: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    height: 400px;
+}
+
+.select-dropdown select:active,
+.select-dropdown select:focus {
+    outline: none;
+    box-shadow: none
+}
+
+.select-dropdown:after {
+
+    top: 50%;
+    margin-top: -2px;
+    right: 8px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #fff;
+    pointer-events: none
+}
+
+/*=============================================================================================================
+Top Panel
+=============================================================================================================*/
+
+.top-panel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #1A1A1A;
+    opacity: 0.2;
+    height: 30px;
+    width: 100%;
+    z-index: 40;
+}
+
+.top-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    color: #fbfbfb;
+    height: 30px;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.settings-button {
+    order: 1;
+    flex: 0 1 50%;
+    align-self: center;
+}
+
+.fa.fa-cog {
+    margin-left: 5px;
+}
+
+.fa.fa-times {
+    margin-left: 5px;
+}
+
+.date {
+    flex: 0 1 50%;
+    order: 2;
+    align-self: center;
+}
+
+.date p {
+    font-size: 15px;
+    text-align: right;
+    margin-right: 5px;
+}
+
+/*=============================================================================================================
+Spinner
+=============================================================================================================*/
+.spinner-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background: rgba(77, 75, 75, .7)
+    /*background-color: #1A1A1A;*/
+}
+
+.spinner {
+    width: 100%;
+    height: 100%;
+
+}
+
+/*=============================================================================================================
+Salah details
+=============================================================================================================*/
+
+.salah-details {
+    background-color: #D1D1D1;
+    position: relative;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.remaining-time p {
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+    z-index: 100;
+}
+
+#next-salah {
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+    z-index: 100;
+}
+
+.remaining-time img {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+}
+
+.salah-started > p {
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
+
+/*=============================================================================================================
+Salah times screen
+=============================================================================================================*/
+
+.salah-screen {
+    width: 100%;
+}
+
+.salah-times div {
+    font-size: 100%;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.salah-title {
+    color: #ffffff;
+    font-size: 14px;
+    padding-top: 16px;
+    padding-bottom: 21px;
+    padding-left: 15px;
+    text-align: left;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    width: 150px;
+}
+
+.salah-time {
+    position: relative;
+    color: #ffffff;
+    /*font-weight: bold;*/
+    font-size: 18px;
+    text-align: right;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    padding-top: 12px;
+    padding-right: 15px;
+    padding-bottom: 20px;
+    width: 150px;
+}
+
+.fajr span {
+    background-color: #E6A184;
+}
+
+.sunrise span {
+    background-color: #DE7B6C;
+}
+
+.dhuhr span {
+    background-color: #DE676F;
+
+}
+
+.asr span {
+    background-color: #B1637B;
+}
+
+.maghrib span {
+    background-color: #675673;
+}
+
+.isha span {
+    background-color: #3C5A73;
+}
+
+/*=============================================================================================================
+Settings screen
+=============================================================================================================*/
+.settings-screen {
+    font-size: 100%;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    z-index: 30;
+    color: #f9f9f9;
+    top: 500px;
+    height: 600px;
+    width: 100%;
+    padding-top: 50px;
+    /*padding-left: 15px;
+    padding-right: 15px;*/
+}
+
+.settings-screen-bg {
+    position: absolute;
+    top: 500px;
+    width: 260px;
+    height: 600px;
+    width: 100%;
+    z-index: 20;
+    background-color: #b1637b;
+}
+
+.settings-screen-overlay {
+    position: absolute;
+    top: 500px;
+    background-color: #333333;
+    opacity: 0.6;
+    width: 260px;
+    height: 600px;
+    width: 100%;
+    z-index: 30;
+}
+
+.notifications {
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 230px;
+}
+
+.notification-time,
+.jumuah-notification-time {
+    position: relative;
+    font-size: 90%;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 210px;
+}
+
+/*Range slider -------------------------------------------------------*/
+.rangeslider {
+    background: #bbbbbb !important
+}
+
+.rangeslider,
+.rangeslider__fill {
+    box-shadow: none !important
+}
+
+.rangeslider__fill {
+    background: #bbbbbb !important;
+    border-radius: 10px 0 0 10px !important
+}
+
+.rangeslider--horizontal {
+    height: 4px !important
+}
+
+.rangeslider__handle {
+    top: -8px !important;
+    width: 19px !important;
+    height: 19px !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important
+}
+
+.rangeslider__handle:after {
+    display: none !important
+}
+
+/*Dhuhr time selection------------------------------------------------------*/
+.dhuhr-time {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.dhuhr-time .onoffswitch {
+    margin-top: 14px;
+}
+
+/*Location selection------------------------------------------------------*/
+.locations {
+    margin-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.locations select {
+    width: 155px !important;
+    color: #f9f9f9;
+    border: none;
+    border-bottom: 1px dotted rgba(255, 255, 255, .0);
+    background-color: transparent;
+    font-size: 14px;
+}
+
+.locations select:hover {
+    width: 155px;
+    color: #f9f9f9;
+    border: none;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.locations select:active,
+.locations select:focus {
+    outline: none;
+    box-shadow: none;
+    background-color: #b1637b;
+}
+
+option:hover {
+    background-color: #aa556f;
+}
+
+/*Feedback ----------------------------------------------------------------------*/
+.feedback {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.feedback:hover {
+    cursor: pointer;
+}
+
+.feedback p:first-child {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.feedback p:last-child {
+    font-size: 80%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/* Sharing Buttons ------------------------------------------------------------*/
+.share-icons {
+    margin-top: 10px;
+    font-size: 130%;
+}
+
+.fa.fa-facebook-square:hover,
+.fa.fa-twitter-square:hover,
+.fa.fa-google-plus-square:hover {
+    color: #C74D74;
+    cursor: pointer;
+}
+
+.fa-facebook-square,
+.fa-twitter-square {
+    margin-right: 3px;
+}
+
+/*=============================================================================================================
+ANDROID NOTIFICATION ON/OFF CHECKBOX
+=============================================================================================================*/
+.onoffswitch {
+    margin-top: 5px;
+    position: relative;
+    width: 35px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+    display: none;
+}
+
+.onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    height: 11px;
+    padding: 0;
+    line-height: 11px;
+    border: 0px solid #CCCCCC;
+    border-radius: 19px;
+    background-color: #D1D1D1;
+}
+
+.onoffswitch-label:before {
+    content: "";
+    display: block;
+    width: 19px;
+    margin: -4px;
+    background: #f9f9f9;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 20px;
+    border-radius: 19px;
+    box-shadow: 0 6px 12px 0px #757575;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: #C74D74;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    border-color: #C74D74;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 0px;
+    background-color: #F9F9F9;
+    box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
+}
+
+/*Separation line*/
+.line {
+    margin: 13px 0 13px 0;
+    height: 1px;
+    background: rgba(255, 255, 255, .3)
+}

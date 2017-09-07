@@ -1,0 +1,39 @@
+{
+    "manifest_version": 2,
+    "name": "Dnevna Vaktija",
+    "short_name": "DV",
+    "description": "Dnevni prikaz namaskih vremena za Bosnu i Hercegovinu.",
+    "version": "2.5.2",
+    "browser_action": {
+        "default_icon": "img/icon.png",
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "activeTab",
+        "http://207.154.194.134:8090/times",
+        "storage",
+        "alarms",
+        "notifications"
+    ],
+    "background": {
+        "scripts": [
+            "scripts/lib/jquery-2.2.2.min.js",
+            "scripts/eventpage.js",
+            "scripts/lib/rangeslider.min.js"
+        ],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "scripts/lib/jquery-2.2.2.min.js",
+                "scripts/lib/rangeslider.min.js",
+                "scripts/lib/jquery.countdown.min.js",
+                "scripts/lib/spin.min.js"
+            ],
+            "matches": [
+                "file:///scripts*"
+            ]
+        }
+    ]
+}

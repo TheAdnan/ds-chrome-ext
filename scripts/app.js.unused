@@ -1,0 +1,437 @@
+"use strict";
+
+//alert(localStorage.getItem('locationIndex'))
+
+generatePlacesSelectList();
+var date = new Date();
+
+var locationIndex;
+
+$(document).ready(function () {
+
+    //========================================================================================== 
+    //INITIAL PLACE SELECTION
+    //==========================================================================================
+    if (localStorage.getItem("locationIndex") != '-1') {
+        $('.initial-loaction-selection').hide();
+    }
+    else {
+        $('.initial-loaction-selection').show();
+    }
+
+    $("#initial-locations").on("change", function () {
+        var initialLocationIndex = $('#initial-locations').val();
+
+        localStorage.setItem('locationIndex', initialLocationIndex);
+
+        locationIndex = $('#initial-locations').val();
+
+        chrome.runtime.reload();
+    })
+
+    //==========================================================================================
+    //SALAH TIMES DISPLAY
+    //==========================================================================================
+    displaySalahTimes();
+
+
+    //==========================================================================================
+    //NOTIFICATIONS
+    //==========================================================================================
+    // var notificationTime = JSON.parse(localStorage.getItem("notificationTime"));
+    // var jumuahNotificationTime = JSON.parse(localStorage.getItem("jumuahNotificationTime"));
+    // var showNotifications = JSON.parse(localStorage.getItem("showNotifications"));
+    // var dhuhrStandardTime = JSON.parse(localStorage.getItem("dhuhrStandardTime"));
+
+    // // if (showNotifications || showNotifications == null) {
+    // if (showNotifications) {
+
+    //     $("#notification-switch").attr("checked", "checked");
+    //     $(".notification-time").show();
+    //     $(".jumuah-notification-time").show();
+    //     $("#notification-time").attr("value", notificationTime.toString());
+    //     $("#jumuah-notification-time").attr("value", jumuahNotificationTime.toString());
+
+    //     $('.notification-time output').text(notificationTime.toString());
+    //     $('.jumuah-notification-time output').text(jumuahNotificationTime.toString());
+    //     localStorage.setItem("showNotifications", "true");
+
+    // } else {
+
+    //     $("#notification-switch").removeAttr("checked");
+    //     $(".notification-time").hide();
+    //     $(".jumuah-notification-time").hide();
+    // }
+
+    // $("#notification-switch").on("change", function () {
+    //     if ($(this).is(":checked")) {
+
+    //         localStorage.setItem("showNotifications", "true");
+    //         $(".notification-time").toggle();
+    //         $("#notification-time").attr("value", notificationTime.toString());
+    //         $('.notification-time output').text(notificationTime.toString());
+
+    //         $(".jumuah-notification-time").toggle();
+    //         $("#jumuah-notification-time").attr("value", notificationTime.toString());
+    //         $('.jumuah-notification-time output').text(notificationTime.toString());
+    //     } else {
+
+    //         localStorage.setItem("showNotifications", "false");
+    //         $(".notification-time").toggle();
+    //         $(".jumuah-notification-time").toggle();
+    //     }
+    // });
+
+    // //Notification time Range slider
+    // var NToutput = $('.notification-time output');
+
+    // $('#notification-time').rangeslider({
+    //     polyfill: false,
+    //     rangeClass: 'rangeslider',
+    //     disabledClass: 'rangeslider--disabled',
+    //     horizontalClass: 'rangeslider--horizontal',
+    //     verticalClass: 'rangeslider--vertical',
+    //     fillClass: 'rangeslider__fill',
+    //     handleClass: 'rangeslider__handle',
+    //     onInit: function () {
+    //         NToutput.textContent = this.value;
+    //     }
+    // }).on('input', function () {
+    //     localStorage.setItem("notificationTime", this.value);
+    //     NToutput.text(this.value);
+    // });
+
+    // //Jumuah notification time Range slider
+    // var JNToutput = $('.jumuah-notification-time output');
+
+    // $('#jumuah-notification-time').rangeslider({
+    //     polyfill: false,
+    //     rangeClass: 'rangeslider',
+    //     disabledClass: 'rangeslider--disabled',
+    //     horizontalClass: 'rangeslider--horizontal',
+    //     verticalClass: 'rangeslider--vertical',
+    //     fillClass: 'rangeslider__fill',
+    //     handleClass: 'rangeslider__handle',
+    //     onInit: function () {
+    //         JNToutput.textContent = this.value;
+    //     }
+    // }).on('input', function () {
+    //     localStorage.setItem("jumuahNotificationTime", this.value);
+    //     JNToutput.text(this.value);
+    // });
+
+    //==========================================================================================
+    //DHUHR TIME - STANDAR OR REAL
+    //==========================================================================================
+    var dhuhrStandardTime = JSON.parse(localStorage.getItem("dhuhrStandardTime"));
+    if (dhuhrStandardTime || dhuhrStandardTime == null) {
+        localStorage.setItem("dhuhrStandardTime", "true");
+        $("#dhuhr-time").attr("checked", "checked");
+    } else {
+        $("#dhuhr-time").removeAttr("checked");
+        localStorage.setItem("dhuhrStandardTime", "false");
+    }
+
+    $("#dhuhr-time").on("change", function () {
+        if ($("#dhuhr-time").is(':checked')) {
+            localStorage.setItem("dhuhrStandardTime", "true");
+        } else {
+            localStorage.setItem("dhuhrStandardTime", "false");
+        }
+    });
+
+    //==========================================================================================
+    //DATE
+    //==========================================================================================
+    var monthNames = [
+        "Januar", "Februar", "Mart",
+        "April", "Maj", "Juni", "Juli",
+        "August", "Septembar", "Oktobar",
+        "Novembar", "Decembar"
+    ];
+
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+    $('.date p').text(day + ". " + monthNames[monthIndex] + " " + year + ".");
+
+    //==========================================================================================
+    //FEEDBACK
+    //==========================================================================================
+
+    $(".feedback").on("click", function () {
+        var url = "mailto:inel.a.pandzic@gmail.com";
+        chrome.tabs.create({
+            url: url
+        });
+    });
+
+    //==========================================================================================
+    //SHARRING BUTTONS
+    //==========================================================================================
+    $(".fa.fa-facebook-square").on("click", function () {
+        var url = "https://www.facebook.com/sharer/sharer.php?u=https%3A//chrome.google.com/webstore/detail/dnevna-vaktija-bih/hiinlfchblibgjbfpkppokkfkgofgjjn";
+        chrome.tabs.create({
+            url: url
+        });
+    });
+
+    $(".fa.fa-twitter-square").on("click", function () {
+        var url = "https://chrome.google.com/webstore/detail/dnevna-vaktija-bih/hiinlfchblibgjbfpkppokkfkgofgjjn";
+        chrome.tabs.create({
+            url: url
+        });
+    });
+
+    $(".fa.fa-google-plus-square").on("click", function () {
+        var url = "https://plus.google.com/share?url=https%3A//chrome.google.com/webstore/detail/dnevna-vaktija-bih/hiinlfchblibgjbfpkppokkfkgofgjjn";
+        chrome.tabs.create({
+            url: url
+        });
+    });
+
+    //==========================================================================================
+    //PLACE CHANGE
+    //==========================================================================================
+    $('#locations-list').val(localStorage.getItem('locationIndex'));
+
+    $('#locations-list').on('change', function () {
+
+        var locationIndex = $('#locations-list').val();
+
+        localStorage.setItem('locationIndex', locationIndex);
+        console.log("Place index app.js - " + locationIndex);
+    });
+
+    //==========================================================================================
+    //SETTINGS BUTTON
+    //==========================================================================================
+    $(".fa.fa-times").hide();
+
+    $("#settings-button").click(function () {
+
+        if ($(".settings-screen").css("top") == "500px") {
+            $(".settings-screen").animate({
+                top: "0px"
+            }, 170);
+            $(".settings-screen-overlay").animate({
+                top: "0px"
+            }, 170);
+            $(".settings-screen-bg").animate({
+                top: "0px"
+            }, 170);
+            $(".fa.fa-cog").hide(170);
+            $(".fa.fa-times").show(170);
+        } else {
+
+            chrome.runtime.getBackgroundPage(function (backgroundPage) {
+                backgroundPage.getSalahTimes().then(function (salahTimes) {
+                    $("#fajr").html(salahTimes.zora);
+                    $("#sunrise").html(salahTimes.izlazakSunca);
+                    $("#dhuhr").html(salahTimes.podne);
+                    $("#asr").html(salahTimes.ikindija);
+                    $("#maghrib").html(salahTimes.aksam);
+                    $("#isha").html(salahTimes.jacija);
+
+                    displaySalahDetails(salahTimes);
+                });
+            });
+
+            //Waits for 1 second so the getSalahTimes() eventpage method can load and save new salah times to localstorage
+            //so that the displaySalahTimes() methot can render new times
+            // window.setTimeout(function () {
+            //     displaySalahTimes();
+            // }, 1000);
+
+            $(".settings-screen").animate({
+                top: "500px"
+            }, 170);
+
+            $(".settings-screen-overlay").animate({
+                top: "500px"
+            }, 170);
+
+            $(".settings-screen-bg").animate({
+                top: "500px"
+            }, 170);
+
+            $(".fa.fa-cog").show(170);
+            $(".fa.fa-times").hide(170);
+        }
+    });
+});
+
+
+//----------------------------------------------------------------------------------------
+//FUNCTIONS------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
+
+//Gets the salah time from localstorage and writes them in popup.html
+function displaySalahTimes() {
+
+    getSalahTimes(localStorage.getItem('locationIndex')).then(function (result) {
+
+        var salahTimes = result;
+
+        $("#fajr").html(salahTimes.zora);
+        $("#sunrise").html(salahTimes.izlazakSunca);
+        $("#dhuhr").html(salahTimes.podne);
+        $("#asr").html(salahTimes.ikindija);
+        $("#maghrib").html(salahTimes.aksam);
+        $("#isha").html(salahTimes.jacija);
+
+        displaySalahDetails(salahTimes);
+
+    });
+}
+
+//Shows salah details (Countdown and next-salah message)
+function displaySalahDetails(salahTimes) {
+
+    var salahDetails = getSalahDetails(salahTimes);
+
+    var midnight = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 0)
+
+    var finalDate = dateFomater() + ' ' + salahDetails.nextSalahTime;
+
+    if (salahDetails.name == "isha") {
+        if (Date.now() < midnight.getTime()) {
+            finalDate = dateFomater(true) + ' ' + salahDetails.nextSalahTime;
+        } else {
+            finalDate = dateFomater() + ' ' + salahDetails.nextSalahTime;
+        }
+    }
+
+    $("#next-salah").text(salahDetails.message);
+    $(".salah-details").css("background-color", salahDetails.bgColor);
+
+    $("#salah-countdown").countdown(finalDate, function (event) {
+        $(this).text(event.strftime('%H:%M:%S'));
+    });
+
+}
+
+function getSalahTimes(placeIndex) {
+
+    var deferred = $.Deferred();
+    var promise = deferred.promise();
+    var salahTimes = JSON.parse(localStorage.getItem("salahTimes"));
+
+    if (salahTimes.day != date.getDate()) {
+        chrome.runtime.getBackgroundPage(function (backgroundPage) {
+            backgroundPage.getSalahTimes().then(function (salahTimes) {
+                deferred.resolve(salahTimes)
+            });
+        });
+
+    } else {
+        deferred.resolve(salahTimes);
+    }
+
+    return promise;
+}
+
+//Gets the details of the current salah
+function getSalahDetails(salahTimes) {
+
+    var salah = {};
+
+    var currentTime = date.getHours().toString() + ":" + date.getMinutes().toString();
+    var referanceDate = '08/13/2015';
+
+    var isSunrise = Date.parse("08/13/2015 " + currentTime) > Date.parse("08/13/2015 " + salahTimes.izlazakSunca) &&
+        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 " + salahTimes.podne);
+
+    var isDhuhr = Date.parse("08/13/2015 " + currentTime) > Date.parse("08/13/2015 " + salahTimes.podne) &&
+        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 " + salahTimes.ikindija);
+
+    var isAsr = Date.parse("08/13/2015 " + currentTime) > Date.parse("08/13/2015 " + salahTimes.ikindija) &&
+        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 " + salahTimes.aksam);
+
+    var isMaghrib = Date.parse("08/13/2015 " + currentTime) > Date.parse("08/13/2015 " + salahTimes.aksam) &&
+        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 " + salahTimes.jacija);
+
+    var isIsha = (Date.parse("08/13/2015 " + currentTime) > Date.parse("08/13/2015 " + salahTimes.jacija) &&
+        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 23:59")) ||
+        (Date.parse("08/14/2015 " + currentTime) > Date.parse("08/13/2015 00:01") &&
+        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 " + salahTimes.zora));
+
+    //Checking between which two salah times is the currentTime, than the first one is the current salah
+    if (isSunrise) {
+        salah.name = "sunrise";
+        salah.currentSalahTime = salahTimes.izlazakSunca;
+        salah.nextSalahTime = salahTimes.podne;
+        salah.message = 'preostalo do podne namaza';
+        salah.bgColor = '#DE7B6C';
+    } else if (isDhuhr) {
+        salah.name = "dhuhr";
+        salah.currentSalahTime = salahTimes.podne;
+        salah.nextSalahTime = salahTimes.ikindija;
+        salah.message = 'preostalo do ikindije namaza';
+        salah.bgColor = '#DE676F';
+    } else if (isAsr) {
+        salah.name = "asr";
+        salah.currentSalahTime = salahTimes.ikindija;
+        salah.nextSalahTime = salahTimes.aksam;
+        salah.message = 'preostalo do akšam namaza';
+        salah.bgColor = '#B1637B';
+    } else if (isMaghrib) {
+        salah.name = "maghrib";
+        salah.currentSalahTime = salahTimes.aksam;
+        salah.nextSalahTime = salahTimes.jacija;
+        salah.message = 'preostalo do jacije namaza';
+        salah.bgColor = '#675673';
+    } else if (isIsha) {
+        salah.name = "isha";
+        salah.currentSalahTime = salahTimes.jacija;
+        salah.nextSalahTime = salahTimes.zora;
+        salah.message = 'preostalo za jaciju namaz';
+        salah.bgColor = '#3C5A73';
+    } else {
+        salah.name = "fajr";
+        salah.currentSalahTime = salahTimes.zora;
+        salah.nextSalahTime = salahTimes.izlazakSunca;
+        salah.message = 'preostalo do izlaska sunca';
+        salah.bgColor = '#E6A184';
+    }
+
+    return salah;
+}
+
+
+//Generates locations select list
+function generatePlacesSelectList() {
+
+    var locations = ["Banovići", "Banja Luka", "Bihać", "Bijeljina", "Bileća", "Bos.Brod", "Bos.Dubica", "Bos.Gradiška", "Bos.Grahovo", "Bos.Krupa", "Bos.Novi", "Bos.Petrovac", "Bos.Šamac", "Bratunac", "Brčko", "Breza", "Bugojno", "Busovača", "Bužim", "Cazin", "Čajniče", "Čapljina", "Čelić", "Čelinac", "Čitluk", "Derventa", "Doboj", "Donji Vakuf", "Drvar", "Foča", "Fojnica", "Gacko", "Glamoč", "Goražde", "Gornji Vakuf", "Gračanica", "Gradačac", "Grude", "Hadžići", "Han-Pijesak", "Ilijaš", "Jablanica", "Jajce", "Kakanj", "Kalesija", "Kalinovik", "Kiseljak", "Kladanj", "Ključ", "Konjic", "Kotor-Varoš", "Kreševo", "Kupres", "Laktaši", "Livno", "Lopare", "Lukavac", "Ljubinje", "Ljubuški", "Maglaj", "Modriča", "Mostar", "Mrkonjić-Grad", "Neum", "Nevesinje", "Novi Travnik", "Odžak", "Olovo", "Orašje", "Pale", "Posušje", "Prijedor", "Prnjavor", "Prozor", "Rogatica", "Rudo", "Sanski Most", "Sarajevo", "Skender-Vakuf", "Sokolac", "Srbac", "Srebrenica", "Srebrenik", "Stolac", "Šekovići", "Šipovo", "Široki Brijeg", "Teslić", "Tešanj", "Tomislav-Grad", "Travnik", "Trebinje", "Trnovo", "Tuzla", "Ugljevik", "Vareš", "V.Kladuša", "Visoko", "Višegrad", "Vitez", "Vlasenica", "Zavidovići", "Zenica", "Zvornik", "Žepa", "Žepče", "Živinice"];
+
+    var locationsFirstLetters = ["B", "C", "Č", "D", "F", "G", "H", "I", "J", "K", "L", "Lj", "M", "N", "O", "P", "R", "S", "Š", "T", "U", "V", "Z", "Ž"];
+
+    var locationList = $('#locations-list');
+    var initialLocationList = $('#initial-locations');
+
+    var alphabetLetter = 0;
+
+    for (var i = 0; i < locations.length; i++) {
+        initialLocationList.append('<option value="' + i.toString() + '">' + locations[i] + '</option>');
+        locationList.append('<option value="' + i.toString() + '">' + locations[i] + '</option>');
+    }
+}
+
+//Formates date to "yyyy-mm-dd"
+function dateFomater(isIsha) {
+    var d = date;
+
+    if (isIsha) {
+        d = new Date(date.getTime() + 86400000);
+    }
+
+    var yyyy = d.getFullYear().toString();
+    var mm = (d.getMonth() + 1).toString(); // getMonth() is zero-based
+    var dd = d.getDate().toString();
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    return yyyy + '-' + mm + '-' + dd;
+}

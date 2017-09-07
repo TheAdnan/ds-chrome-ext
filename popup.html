@@ -1,0 +1,157 @@
+<!doctype html>
+<!--
+This page is shown when the extension button is clicked, because the
+"browser_action" field in manifest.json contains the "default_popup" key with
+value "popup.html".
+-->
+<html>
+
+<head>
+    <title>Vaktija za Bosnu i Hercegovinu</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/rangeslider.css">
+
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
+    <link href='https://fonts.googleapis.com/css?family=Dosis:400,600' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <!-- Container-->
+    <div class="container">
+
+        <div class="spinner-wrapper">
+            <div class="spinner" id="spinner"></div>
+        </div>
+        <!-- Initial location selection-->
+        <div class="initial-loaction-selection">
+            <div class="select-dropdown">
+                <select id="initial-locations" size="3">
+                </select>
+            </div>
+        </div>
+
+        <!-- Settings screen-->
+        <div class="settings-screen-bg"></div>
+        <div class="settings-screen-overlay"></div>
+        <div class="settings-screen">
+            <div class="settings-options">
+                <!--<div class="notifications w100 left">
+                    <div class="left w50 settings-title">Notifikacije</div>
+                    <div class="right w50 onoffswitch">
+                        <input type="checkbox" name="notification-switch" class="onoffswitch-checkbox" id="notification-switch">
+                        <label class="onoffswitch-label" for="notification-switch"></label>
+                    </div>
+                    <div class="notification-time">
+                        <div class="text-left left w100">
+                            <p>
+                                <output></output> minuta prije namaza
+                            </p>
+                        </div>
+                        <div class="left w100">
+                            <input type="range" name="notification-time" id="notification-time" min="5" value="15" max="30" step="1">
+                        </div>
+                    </div>
+                    <div class="jumuah-notification-time">
+                        <div class="text-left left w100">
+                            <p>
+                                Džuma:
+                                <output></output> minuta prije
+                            </p>
+                        </div>
+                        <div class="left w100">
+                            <input type="range" name="jumuah-notification-time" id="jumuah-notification-time" min="5" value="35" max="60" step="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="line left w100"></div>-->
+                <div class="dhuhr-time">
+                    <div class="left w70 settings-title">Podnevsko vrijeme 12h/13h</div>
+                    <div class="right onoffswitch">
+                        <input type="checkbox" name="dhuhr-time" class="onoffswitch-checkbox" name="dhuhr-time" id="dhuhr-time">
+                        <label class="onoffswitch-label" for="dhuhr-time"></label>
+                    </div>
+                </div>
+
+                <div class="line left w100"></div>
+                <div class="locations w100 left">
+                    <div class="left w30 settings-title">Lokacija: </div>
+                    <div class="left">
+                        <select id="locations-list"></select>
+                    </div>
+                </div>
+                <div class="line left w100"></div>
+                <div class="feedback w100 left">
+                    <p>Feedback</p>
+                    <p>Pošalji sugestiju, grešku ili samo poselami..</p>
+                </div>
+                <div class="line left w100"></div>
+                <div class="share-icons left w100 text-center">
+                    <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                    <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                    <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Main, salah times screen-->
+        <div class="salah-screen">
+
+            <!-- Top Panel -->
+            <div class="top-panel-overlay"></div>
+            <div class="top-panel">
+                <div id="settings-button" class="settings-button">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                    <i class="fa fa-times" aria-hidden="true" hidden></i>
+                </div>
+                <div class="date">
+                    <p></p>
+                </div>
+            </div>
+
+            <!-- Salah details -->
+            <div class="salah-details">
+                <div class="remaining-time">
+                    <p id="salah-countdown"></p>
+                    <p id="next-salah"></p>
+                    <!--<p id="isha-time">Vrijeme je jacije</p>-->
+                </div>
+                <div class="salah-started">
+                    <p></p>
+                </div>
+            </div>
+
+            <!-- Salah times -->
+            <div class="salah-times">
+                <div class="fajr">
+                    <span class="salah-title">ZORA</span><span id="fajr" class="salah-time">--:--</span>
+                </div>
+                <div class="sunrise">
+                    <span class="salah-title">IZLAZAK SUNCA</span><span id="sunrise" class="salah-time">--:--</span>
+                </div>
+                <div class="dhuhr">
+                    <span class="salah-title">PODNE</span><span id="dhuhr" class="salah-time">--:--</span>
+                </div>
+                <div class="asr">
+                    <span class="salah-title">IKINDIJA</span><span id="asr" class="salah-time">--:--</span>
+                </div>
+                <div class="maghrib">
+                    <span class="salah-title">AKŠAM</span><span id="maghrib" class="salah-time">--:--</span>
+                </div>
+                <div class="isha">
+                    <span class="salah-title">JACIJA</span><span id="isha" class="salah-time">--:--</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/lib/jquery-2.2.2.min.js" charset="UTF-8"></script>
+    <script src="scripts/lib/jquery.countdown.min.js" charset="UTF-8"></script>
+    <script src="scripts/lib/rangeslider.min.js" charset="UTF-8"></script>
+    <script src="scripts/lib/spin.min.js" charset="UTF-8"></script>
+    <script src="scripts/app.js" charset="UTF-8"></script>
+</body>
+
+</html>
