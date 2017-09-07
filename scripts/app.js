@@ -188,11 +188,6 @@ var app = {
     }
 }
 
-
-//----------------------------------------------------------------------------------------
-//FUNCTIONS------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------
-
 //Gets the salah time from localstorage and writes them in popup.html
 function displaySalahTimes(locationIndex, isLocationChanged, initialLocationSelection) {
 
@@ -348,12 +343,8 @@ function generatePlacesSelectList() {
 
     var locations = ["Banovići", "Banja Luka", "Bihać", "Bijeljina", "Bileća", "Bos.Brod", "Bos.Dubica", "Bos.Gradiška", "Bos.Grahovo", "Bos.Krupa", "Bos.Novi", "Bos.Petrovac", "Bos.Šamac", "Bratunac", "Brčko", "Breza", "Bugojno", "Busovača", "Bužim", "Cazin", "Čajniče", "Čapljina", "Čelić", "Čelinac", "Čitluk", "Derventa", "Doboj", "Donji Vakuf", "Drvar", "Foča", "Fojnica", "Gacko", "Glamoč", "Goražde", "Gornji Vakuf", "Gračanica", "Gradačac", "Grude", "Hadžići", "Han-Pijesak", "Ilijaš", "Jablanica", "Jajce", "Kakanj", "Kalesija", "Kalinovik", "Kiseljak", "Kladanj", "Ključ", "Konjic", "Kotor-Varoš", "Kreševo", "Kupres", "Laktaši", "Livno", "Lopare", "Lukavac", "Ljubinje", "Ljubuški", "Maglaj", "Modriča", "Mostar", "Mrkonjić-Grad", "Neum", "Nevesinje", "Novi Travnik", "Odžak", "Olovo", "Orašje", "Pale", "Posušje", "Prijedor", "Prnjavor", "Prozor", "Rogatica", "Rudo", "Sanski Most", "Sarajevo", "Skender-Vakuf", "Sokolac", "Srbac", "Srebrenica", "Srebrenik", "Stolac", "Šekovići", "Šipovo", "Široki Brijeg", "Teslić", "Tešanj", "Tomislav-Grad", "Travnik", "Trebinje", "Trnovo", "Tuzla", "Ugljevik", "Vareš", "V.Kladuša", "Visoko", "Višegrad", "Vitez", "Vlasenica", "Zavidovići", "Zenica", "Zvornik", "Žepa", "Žepče", "Živinice"];
 
-    var locationsFirstLetters = ["B", "C", "Č", "D", "F", "G", "H", "I", "J", "K", "L", "Lj", "M", "N", "O", "P", "R", "S", "Š", "T", "U", "V", "Z", "Ž"];
-
     var locationList = $('#locations-list');
     var initialLocationList = $('#initial-locations');
-
-    var alphabetLetter = 0;
 
     for (var i = 0; i < locations.length; i++) {
         initialLocationList.append('<option value="' + i.toString() + '">' + locations[i] + '</option>');
