@@ -22,26 +22,33 @@ if (localStorage.getItem('dhuhrStandardTime') == null) {
 }
 
 var placeIndex = localStorage.getItem('locationIndex');
-if (placeIndex != '-1') {
+if (placeIndex !== '-1') {
     getSalahTimes(placeIndex);
 }
 
 function getSalahTimes(placeIndex) {
 
-    var apiEndpont = 'http://207.154.194.134:8090/times/';
+    var apiEndpoint = 'http://207.154.194.134:8090/times/';
 
     var deferred = $.Deferred();
     var promise = deferred.promise();
 
 
-    $.getJSON(apiEndpont + placeIndex, function (data) {
+    $.getJSON(apiEndpoint + placeIndex, function (data) {
 
         var dhuhrStandardTime = JSON.parse(localStorage.getItem("dhuhrStandardTime"));
 
         var salahTimes = data;
 
         if (dhuhrStandardTime) {
-            salahTimes.dhuhr = "13:00";
+
+            var hoursMinutes = salahTimes.dhuhr.split(':')
+
+            if (hoursMinutes[0] === '11')
+                salahTimes.dhuhr = "12:00";
+            else
+                salahTimes.dhuhr = "13:00";
+
             localStorage.setItem("salahTimes", JSON.stringify(salahTimes));
             deferred.resolve(salahTimes);
         }

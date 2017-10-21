@@ -3,7 +3,6 @@
 generatePlacesSelectList();
 
 var dhuhrTimeSettingChanged = false;
-console.log(dhuhrTimeSettingChanged)
 
 var date = new Date();
 
@@ -11,7 +10,7 @@ $(document).ready(function () {
 
     $(".spinner-wrapper").hide();
 
-    if (localStorage.getItem("locationIndex") != '-1') {
+    if (localStorage.getItem("locationIndex") !== '-1') {
         $('.initial-loaction-selection').hide();
         displaySalahTimes(localStorage.getItem("locationIndex"), false, false);
 
@@ -81,7 +80,7 @@ var app = {
                 $(".fa.fa-times").show(170);
             } else {
 
-                if(dhuhrTimeSettingChanged){
+                if (dhuhrTimeSettingChanged) {
                     dhuhrTimeSettingChanged = false;
                     displaySalahTimes(newLocationIndex, true, false);
                 }
@@ -278,22 +277,22 @@ function getSalahDetails(salahTimes) {
     var currentTime = date.getHours().toString() + ":" + date.getMinutes().toString();
     var referanceDate = '08/13/2015';
 
-    var isSunrise = Date.parse("08/13/2015 " + currentTime) > Date.parse("08/13/2015 " + salahTimes.sunrise) &&
-        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 " + salahTimes.dhuhr);
+    var isSunrise = Date.parse(referanceDate + " " + currentTime) > Date.parse(referanceDate + " " + salahTimes.sunrise) &&
+        Date.parse(referanceDate + " " + currentTime) < Date.parse(referanceDate + " " + salahTimes.dhuhr);
 
-    var isDhuhr = Date.parse("08/13/2015 " + currentTime) > Date.parse("08/13/2015 " + salahTimes.dhuhr) &&
-        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 " + salahTimes.asr);
+    var isDhuhr = Date.parse(referanceDate + " " + currentTime) > Date.parse(referanceDate + " " + salahTimes.dhuhr) &&
+        Date.parse(referanceDate + " " + currentTime) < Date.parse(referanceDate + " " + salahTimes.asr);
 
-    var isAsr = Date.parse("08/13/2015 " + currentTime) > Date.parse("08/13/2015 " + salahTimes.asr) &&
-        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 " + salahTimes.maghrib);
+    var isAsr = Date.parse(referanceDate + " " + currentTime) > Date.parse(referanceDate + " " + salahTimes.asr) &&
+        Date.parse(referanceDate + " " + currentTime) < Date.parse(referanceDate + " " + salahTimes.maghrib);
 
-    var isMaghrib = Date.parse("08/13/2015 " + currentTime) > Date.parse("08/13/2015 " + salahTimes.maghrib) &&
-        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 " + salahTimes.isha);
+    var isMaghrib = Date.parse(referanceDate + " " + currentTime) > Date.parse(referanceDate + " " + salahTimes.maghrib) &&
+        Date.parse(referanceDate + " " + currentTime) < Date.parse(referanceDate + " " + salahTimes.isha);
 
-    var isIsha = (Date.parse("08/13/2015 " + currentTime) > Date.parse("08/13/2015 " + salahTimes.isha) &&
-        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 23:59")) ||
-        (Date.parse("08/14/2015 " + currentTime) > Date.parse("08/13/2015 00:01") &&
-        Date.parse("08/13/2015 " + currentTime) < Date.parse("08/13/2015 " + salahTimes.fajr));
+    var isIsha = (Date.parse(referanceDate + " " + currentTime) > Date.parse(referanceDate + " " + salahTimes.isha) &&
+        Date.parse(referanceDate + " " + currentTime) < Date.parse(referanceDate + " 23:59")) ||
+        (Date.parse("08/14/2015 " + currentTime) > Date.parse(referanceDate + " 00:01") &&
+        Date.parse(referanceDate + " " + currentTime) < Date.parse(referanceDate + " " + salahTimes.fajr));
 
     //Checking between which two salah times is the currentTime, than the first one is the current salah
     if (isSunrise) {
@@ -336,7 +335,6 @@ function getSalahDetails(salahTimes) {
 
     return salah;
 }
-
 
 //Generates locations select list
 function generatePlacesSelectList() {
