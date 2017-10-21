@@ -1,23 +1,23 @@
 "use strict";
 
 //Setting initial/default settings values 
-if (localStorage.getItem('locationIndex') == null) {
+if (localStorage.getItem('locationIndex') === null) {
     localStorage.setItem('locationIndex', '-1');
 }
 
-if (localStorage.getItem('notificationTime') == null) {
+if (localStorage.getItem('notificationTime') === null) {
     localStorage.setItem('notificationTime', '15');
 }
 
-if (localStorage.getItem('jumuahNotificationTime') == null) {
+if (localStorage.getItem('jumuahNotificationTime') === null) {
     localStorage.setItem('jumuahNotificationTime', '35');
 }
 
-if (localStorage.getItem('showNotifications') == null) {
+if (localStorage.getItem('showNotifications') === null) {
     localStorage.setItem('showNotifications', 'true');
 }
 
-if (localStorage.getItem('dhuhrStandardTime') == null) {
+if (localStorage.getItem('dhuhrStandardTime') === null) {
     localStorage.setItem('dhuhrStandardTime', 'true');
 }
 

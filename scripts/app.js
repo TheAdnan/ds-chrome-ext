@@ -26,7 +26,6 @@ $(document).ready(function () {
             displaySalahTimes(locationIndex, true, true);
         })
     }
-
 });
 
 var app = {
@@ -193,7 +192,6 @@ function displaySalahTimes(locationIndex, isLocationChanged, initialLocationSele
     $(".spinner-wrapper").show();
     app.spinner().spin(document.getElementById('spinner'))
 
-
     getSalahTimes(locationIndex, isLocationChanged).then(function (result) {
 
         var salahTimes = result;
@@ -214,9 +212,7 @@ function displaySalahTimes(locationIndex, isLocationChanged, initialLocationSele
         app.spinner().stop();
         $(".spinner-wrapper").hide();
 
-
         displaySalahDetails(salahTimes);
-
     });
 }
 

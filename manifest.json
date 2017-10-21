@@ -3,7 +3,7 @@
     "name": "Dnevna Vaktija",
     "short_name": "DV",
     "description": "Dnevni prikaz namaskih vremena za Bosnu i Hercegovinu.",
-    "version": "2.5.2",
+    "version": "2.5.3",
     "browser_action": {
         "default_icon": "img/icon.png",
         "default_popup": "popup.html"
